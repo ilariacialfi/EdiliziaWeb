@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		// DEVO AGGIUNGERE IL CONTROLLO DEL RUOLO
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
 

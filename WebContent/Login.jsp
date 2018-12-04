@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html;
-	charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <p>&nbsp;</p>
 <title>Login</title>
 <h2 style="text-align: center;">
