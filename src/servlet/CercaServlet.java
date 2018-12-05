@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,8 +28,10 @@ public class CercaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//Click "Esci"
+		if (request.getParameter("esci") != null) {
+			esci(request,response);
+		}
 	}
 
 	/**
@@ -38,4 +42,10 @@ public class CercaServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	//HO MESSO TUTTI I METODI PROTECTED, POI CONTROLLARE
+	//Click "Esci"
+	protected void esci(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+		rd.forward(request, response);
+	}
 }

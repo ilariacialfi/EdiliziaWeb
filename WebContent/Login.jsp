@@ -7,6 +7,7 @@
 		gestione della tua macroarea universitaria</span>
 </h2>
 
+
 <center>
 	<!-- imposto il metodo post in modo che i paramentri del form non vengano mostrati nell'url -->
 	<form method="POST" action="LoginServlet" name="login">
@@ -16,12 +17,12 @@
 				<tbody>
 					<tr>
 						<td style="width: 103.2px;">UserID</td>
-						<td style="width: 248.8px;"><input name="id" type="text" /></td>
+						<td style="width: 248.8px;"><input name="id" type="text" required/></td>
 					</tr>
 					<tr>
 						<td style="width: 103.2px;">Password</td>
 						<td style="width: 248.8px;"><input name="pass"
-							type="password" /></td>
+							type="password" required/></td>
 					</tr>
 					<tr>
 						<td style="width: 103.2px;">&nbsp;</td>

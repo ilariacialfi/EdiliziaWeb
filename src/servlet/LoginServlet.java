@@ -1,15 +1,14 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import control.LoginController;
 
 @WebServlet("/LoginServlet")
@@ -36,8 +35,14 @@ public class LoginServlet extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("Cerca.jsp");
 				rd.forward(request, response);
 			} else {
-				RequestDispatcher rd = request.getRequestDispatcher("ErroreLogin.jsp");
-				rd.forward(request, response);
+				// segnala l'errore 
+				response.setContentType("text/html");
+				PrintWriter pw = response.getWriter();
+				pw.println("<script type=\"text/javascript\">");
+				pw.println("alert('UserID o password errati');");
+				pw.println("</script>");
+				RequestDispatcher rd=request.getRequestDispatcher("Login.jsp");
+				rd.include(request, response); 
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
