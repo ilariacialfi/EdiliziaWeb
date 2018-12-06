@@ -30,26 +30,27 @@ public class LoginServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
 
-		try {
-			if (LoginController.accedi(id, pass)) {
-				RequestDispatcher rd = request.getRequestDispatcher("Cerca.jsp");
-				rd.forward(request, response);
-			} else {
-				// segnala l'errore 
-				response.setContentType("text/html");
-				PrintWriter pw = response.getWriter();
-				pw.println("<script type=\"text/javascript\">");
-				pw.println("alert('UserID o password errati');");
-				pw.println("</script>");
-				RequestDispatcher rd=request.getRequestDispatcher("Login.jsp");
-				rd.include(request, response); 
+			try {
+				if (LoginController.accedi(id, pass)) {
+					RequestDispatcher rd = request.getRequestDispatcher("Cerca.jsp");
+					rd.forward(request, response);
+				} else {
+					// segnala l'errore 
+					response.setContentType("text/html");
+					PrintWriter pw=response.getWriter();
+					pw.println("<script type=\"text/javascript\">");
+					pw.println("alert('Password o UserID errati');");
+					pw.println("</script>");
+					RequestDispatcher rd=request.getRequestDispatcher("Login.jsp");
+					rd.include(request, response);
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
+		
 	}
+	
 
 }

@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 
 </head>
 <title>Cerca Stanza</title>
 <!-- appena viene caricata la pagina si vanno ad aggiornare le liste, per prima quella delle attrezzature -->
-
 <body leftmargin="0" topmargin="0" onload="aggiornaListe()">
 	<!-- questo form contiene i pulsanti per uscire, creare una nuova stanza e un nuovo modello -->
 	<form action="CercaServlet" method="GET">
@@ -43,7 +42,6 @@
 					</tr>
 				</tbody>
 			</table>
-
 		</fieldset>
 	</form>
 </body>
