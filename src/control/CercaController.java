@@ -3,6 +3,7 @@ package control;
 import java.sql.SQLException;
 
 import dao.AttrezzaturaDAO;
+import dao.AttrezzaturaSelezionataDAO;
 import dao.AttrezzaturaStanzaDAO;
 import bean.Attrezzatura;
 import bean.AttrezzaturaStanza;
@@ -27,5 +28,17 @@ public class CercaController {
 
 	public static ObservableList<AttrezzaturaStanza> cercaAttr(String st) throws ClassNotFoundException, SQLException {
 		return FXCollections.observableArrayList(AttrezzaturaStanzaDAO.getInstance().getAttrSt(st));
+	}
+	
+	public static void addAttrSel(Attrezzatura attrSel) throws ClassNotFoundException, SQLException {
+		AttrezzaturaSelezionataDAO.getInstance().addAttrSel(attrSel);
+	}
+	
+	public static boolean searchAttrSel(String attrSel) throws ClassNotFoundException, SQLException {
+		return AttrezzaturaSelezionataDAO.getInstance().searchAttrSel(attrSel);
+	}
+	
+	public static void resetAttrSel() throws ClassNotFoundException, SQLException {
+		AttrezzaturaSelezionataDAO.getInstance().resetAttrSel();
 	}
 }

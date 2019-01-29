@@ -18,7 +18,7 @@
 					<tr>
 						<td style="width: 103.2px;">UserID</td>
 						<td style="width: 248.8px;"><input name="id" type="text"
-							required /></td>
+							required autofocus/></td>
 					</tr>
 					<tr>
 						<td style="width: 103.2px;">Password</td>
