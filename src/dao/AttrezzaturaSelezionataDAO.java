@@ -20,7 +20,7 @@ public class AttrezzaturaSelezionataDAO {
 	private Statement stmn = null;
 	private ResultSet rs = null;
 
-	protected AttrezzaturaSelezionataDAO() {
+	private AttrezzaturaSelezionataDAO() {
 	}
 
 	public synchronized static final AttrezzaturaSelezionataDAO getInstance() {
