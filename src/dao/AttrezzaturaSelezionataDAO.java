@@ -5,13 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.chrono.MinguoChronology;
-import java.util.ArrayList;
-
-import javax.sql.ConnectionEvent;
-
-import com.sun.crypto.provider.RSACipher;
-
 import bean.Attrezzatura;
 import control.ControllerDB;
 
@@ -22,17 +15,17 @@ public class AttrezzaturaSelezionataDAO {
 	public static final String CERCA_ATTR = "SELECT attr FROM attr_sel WHERE attr = ?";
 	
 	private static AttrezzaturaSelezionataDAO instance = null;
+	
 	private PreparedStatement pstmn = null;
 	private Statement stmn = null;
 	private ResultSet rs = null;
 
-	// SINGLETON
-	private AttrezzaturaSelezionataDAO() {
+	protected AttrezzaturaSelezionataDAO() {
 	}
 
-	public static AttrezzaturaSelezionataDAO getInstance() {
-		if (instance == null) {
-			instance = new AttrezzaturaSelezionataDAO();
+	public synchronized static final AttrezzaturaSelezionataDAO getInstance() {
+		if (AttrezzaturaSelezionataDAO.instance == null) {
+			AttrezzaturaSelezionataDAO.instance = new AttrezzaturaSelezionataDAO();
 		}
 		return instance;
 	}

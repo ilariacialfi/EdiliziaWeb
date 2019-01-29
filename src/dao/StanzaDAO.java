@@ -19,6 +19,7 @@ public class StanzaDAO {
 	private static final String RINOMINA_STANZA = "UPDATE stanza SET nome = ? WHERE nome = ?";
 
 	private static StanzaDAO instance = null;
+	
 	private ResultSet rs = null;
 	private PreparedStatement pstmn = null;
 	private Statement stmn = null;
@@ -27,9 +28,9 @@ public class StanzaDAO {
 	private StanzaDAO() {
 	}
 
-	public static StanzaDAO getInstance() {
-		if (instance == null) {
-			return instance = new StanzaDAO();
+	public synchronized static final StanzaDAO getInstance() {
+		if (StanzaDAO.instance == null) {
+			StanzaDAO.instance = new StanzaDAO();
 		}
 		return instance;
 	}
