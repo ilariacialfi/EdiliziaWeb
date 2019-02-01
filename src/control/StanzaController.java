@@ -13,7 +13,7 @@ import javafx.collections.ObservableList;
 public class StanzaController {
 
 	public static ObservableList<String> estraiAttrezzatura() throws ClassNotFoundException, SQLException {
-		return FXCollections.observableArrayList(AttrezzaturaDAO.getInstance().getAttrezzatura());
+		return FXCollections.observableArrayList(AttrezzaturaDAO.getInstance().estraiAttrezzatura());
 	}
 
 	public static ObservableList<String> estraiModello() throws ClassNotFoundException, SQLException {

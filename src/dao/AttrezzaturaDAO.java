@@ -14,7 +14,7 @@ public class AttrezzaturaDAO {
 	private static final String ESTRAI_ATTREZZATURA = "SELECT nome FROM attrezzatura ORDER BY nome";
 
 	private static AttrezzaturaDAO instance = null;
-	
+
 	private Statement stmn = null;
 	private ResultSet rs = null;
 
@@ -29,7 +29,7 @@ public class AttrezzaturaDAO {
 	}
 
 	// creo una observable list dal db
-	public ArrayList<String> getAttrezzatura() throws SQLException, ClassNotFoundException {
+	public ArrayList<String> estraiAttrezzatura() throws SQLException, ClassNotFoundException {
 		ArrayList<String> listAttr = null;
 
 		try {

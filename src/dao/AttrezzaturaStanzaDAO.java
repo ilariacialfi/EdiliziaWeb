@@ -35,7 +35,7 @@ public class AttrezzaturaStanzaDAO {
 		return instance;
 	}
 
-	public ArrayList<AttrezzaturaStanza> getAttrSt(String st) throws SQLException, ClassNotFoundException {
+	public synchronized ArrayList<AttrezzaturaStanza> getAttrSt(String st) throws SQLException, ClassNotFoundException {
 		ArrayList<AttrezzaturaStanza> attrSt = null;
 
 		try {
@@ -63,25 +63,26 @@ public class AttrezzaturaStanzaDAO {
 
 	// crea una ObservableList di stanze trovate in base alle quantità minime e
 	// massime selezionate
-	public ArrayList<Stanza> getStanzaConAttr(ObservableList<Attrezzatura> listAttr)
+	public synchronized ArrayList<Stanza> estraiStanzaConAttr(ArrayList<Attrezzatura> listAttr)
 			throws ClassNotFoundException, SQLException {
-		ArrayList<Stanza> listStanze = null;
+		ArrayList<Stanza> listStanze = new ArrayList<Stanza>();
 
 		try {
-
 			Connection conn = ControllerDB.getInstance().connect();
 			pstmn = conn.prepareStatement(STANZA_CON_ATTR);
 
-			for (Attrezzatura attr : listAttr) {
-				pstmn.setString(1, attr.getNome());
-				pstmn.setInt(2, attr.getMin());
-				pstmn.setInt(3, attr.getMax());
-				rs = pstmn.executeQuery();
-
-				listStanze = new ArrayList<Stanza>();
-				while (rs.next()) {
-					listStanze.add(new Stanza(rs.getString("nome"), rs.getString("edificio"), rs.getString("piano"),
-							rs.getString("tipo")));
+			if (listAttr.size() != 0){
+				for (Attrezzatura attr : listAttr) {
+					pstmn.setString(1, attr.getNome());
+					pstmn.setInt(2, attr.getMin());
+					pstmn.setInt(3, attr.getMax());
+					rs = pstmn.executeQuery();
+		
+					listStanze = new ArrayList<Stanza>();
+					while (rs.next()) {
+						listStanze.add(new Stanza(rs.getString("nome"), rs.getString("edificio"), rs.getString("piano"),
+								rs.getString("tipo")));
+					}
 				}
 			}
 		} catch (SQLException se) {
@@ -140,7 +141,7 @@ public class AttrezzaturaStanzaDAO {
 
 	}
 
-	public void aggiornaStanza(String stanza, ObservableList<AttrezzaturaStanza> attrSt)
+	public synchronized void aggiornaStanza(String stanza, ObservableList<AttrezzaturaStanza> attrSt)
 			throws ClassNotFoundException, SQLException {
 		// prima elimino tutte le attrezzature della stanza
 		eliminaStanza(stanza);
@@ -148,7 +149,7 @@ public class AttrezzaturaStanzaDAO {
 		salvaStanza(stanza, attrSt);
 	}
 
-	public void rinominaStanza(String prevName, String nextName) throws SQLException, ClassNotFoundException {
+	public synchronized void rinominaStanza(String prevName, String nextName) throws SQLException, ClassNotFoundException {
 		try {
 			Connection conn = ControllerDB.getInstance().connect();
 			pstmn = conn.prepareStatement(RINOMINA_STANZA);

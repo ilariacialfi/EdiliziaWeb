@@ -22,17 +22,13 @@
 <title>Cerca Stanza</title>
 <!-- appena viene caricata la pagina si vanno ad aggiornare le liste, per prima quella delle attrezzature -->
 <body leftmargin="0" topmargin="0" onload="aggiornaListe()">
-	<!-- questo form contiene i pulsanti per uscire, creare una nuova stanza e un nuovo modello -->
+	<!-- pulsante per uscire -->
 	<form action="CercaServlet" method="GET">
 		<fieldset>
 			<table>
 				<tbody>
 					<tr>
 						<td><input name="esci" type="submit" value="Esci"></td>
-						<td><input name="creaStanza" type="submit"
-							value="Crea/Modifica Stanza"></td>
-						<td><input name="creaModello" type="submit"
-							value="Crea/Modifica Modello"></td>
 					</tr>
 				</tbody>
 			</table>

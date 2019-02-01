@@ -1,6 +1,8 @@
 package control;
 
 import java.sql.SQLException;
+
+import dao.AttrezzaturaSelezionataDAO;
 import dao.UtenteDAO;
 
 public class LoginController {
@@ -16,5 +18,10 @@ public class LoginController {
 
 	public static String ruoloUtente(String id) throws SQLException, ClassNotFoundException {
 		return UtenteDAO.getInstance().getRuolo(id);
+	}
+
+	public static void resetAttrSel() throws ClassNotFoundException, SQLException {
+		AttrezzaturaSelezionataDAO.getInstance().resetAttrSel();
+		return;
 	}
 }

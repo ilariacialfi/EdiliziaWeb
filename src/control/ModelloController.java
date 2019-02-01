@@ -17,7 +17,7 @@ public class ModelloController {
 	}
 
 	public static ObservableList<String> estraiAttrezzatura() throws ClassNotFoundException, SQLException {
-		return FXCollections.observableArrayList(AttrezzaturaDAO.getInstance().getAttrezzatura());
+		return FXCollections.observableArrayList(AttrezzaturaDAO.getInstance().estraiAttrezzatura());
 	}
 
 	public static ObservableList<String> estraiModelli() throws ClassNotFoundException, SQLException {

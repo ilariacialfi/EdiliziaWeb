@@ -26,31 +26,36 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// DEVO AGGIUNGERE IL CONTROLLO DEL RUOLO
+
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
 
-			try {
-				if (LoginController.accedi(id, pass)) {
+		try {
+			if (LoginController.accedi(id, pass)) {
+				LoginController.resetAttrSel();
+				if (LoginController.ruoloUtente(id).equals("segreteria")) {
 					RequestDispatcher rd = request.getRequestDispatcher("Cerca.jsp");
 					rd.forward(request, response);
 				} else {
-					// segnala l'errore 
-					response.setContentType("text/html");
-					PrintWriter pw=response.getWriter();
-					pw.println("<script type=\"text/javascript\">");
-					pw.println("alert('Password o UserID errati');");
-					pw.println("</script>");
-					RequestDispatcher rd=request.getRequestDispatcher("Login.jsp");
-					rd.include(request, response);
+					RequestDispatcher rd = request.getRequestDispatcher("CercaPerUtente.jsp");
+					rd.forward(request, response);
 				}
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			} else {
+				// segnala l'errore
+				response.setContentType("text/html");
+				PrintWriter pw = response.getWriter();
+				pw.println("<script type=\"text/javascript\">");
+				pw.println("alert('Password o UserID errati');");
+				pw.println("</script>");
+				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+				rd.include(request, response);
 			}
-		
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
-	
 
 }
