@@ -70,7 +70,7 @@ public class StanzaDAO {
 			rs = pstmn.executeQuery();
 
 			if (rs.next()) {
-				stanza = new Stanza(nomeStanza, null, null, null);
+				stanza = new Stanza(rs.getString("nome"), rs.getString("edificio"), rs.getString("piano"), rs.getString("tipo"));
 				return stanza;
 			}
 			return null;

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import dao.AttrezzaturaDAO;
 import dao.AttrezzaturaSelezionataDAO;
 import dao.AttrezzaturaStanzaDAO;
-import dao.StanzaDAO;
 import bean.Attrezzatura;
 import bean.AttrezzaturaStanza;
 import bean.Stanza;

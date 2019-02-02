@@ -10,7 +10,6 @@ import control.ControllerDB;
 import bean.Attrezzatura;
 import bean.AttrezzaturaStanza;
 import bean.Stanza;
-import javafx.collections.ObservableList;
 
 public class AttrezzaturaStanzaDAO {
 
@@ -61,7 +60,7 @@ public class AttrezzaturaStanzaDAO {
 		return attrSt;
 	}
 
-	// crea una ObservableList di stanze trovate in base alle quantità minime e
+	// crea una ArrayList di stanze trovate in base alle quantità minime e
 	// massime selezionate
 	public synchronized ArrayList<Stanza> estraiStanzaConAttr(ArrayList<Attrezzatura> listAttr)
 			throws ClassNotFoundException, SQLException {
@@ -117,7 +116,7 @@ public class AttrezzaturaStanzaDAO {
 
 	}
 
-	public synchronized void salvaStanza(String stanza, ObservableList<AttrezzaturaStanza> attrSt)
+	public synchronized void salvaStanza(String stanza, ArrayList<AttrezzaturaStanza> attrSt)
 			throws SQLException, ClassNotFoundException {
 
 		try {
@@ -141,7 +140,7 @@ public class AttrezzaturaStanzaDAO {
 
 	}
 
-	public synchronized void aggiornaStanza(String stanza, ObservableList<AttrezzaturaStanza> attrSt)
+	public synchronized void aggiornaStanza(String stanza, ArrayList<AttrezzaturaStanza> attrSt)
 			throws ClassNotFoundException, SQLException {
 		// prima elimino tutte le attrezzature della stanza
 		eliminaStanza(stanza);

@@ -1,36 +1,34 @@
 package control;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import dao.AttrezzaturaDAO;
 import dao.AttrezzaturaStanzaDAO;
 import dao.ModelloDAO;
 import dao.StanzaDAO;
 import bean.AttrezzaturaStanza;
 import bean.Stanza;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class StanzaController {
 
-	public static ObservableList<String> estraiAttrezzatura() throws ClassNotFoundException, SQLException {
-		return FXCollections.observableArrayList(AttrezzaturaDAO.getInstance().estraiAttrezzatura());
+	public static ArrayList<String> estraiAttrezzatura() throws ClassNotFoundException, SQLException {
+		return AttrezzaturaDAO.getInstance().estraiAttrezzatura();
 	}
 
-	public static ObservableList<String> estraiModello() throws ClassNotFoundException, SQLException {
-		return FXCollections.observableArrayList(ModelloDAO.getInstance().getModello());
+	public static ArrayList<String> estraiModello() throws ClassNotFoundException, SQLException {
+		return ModelloDAO.getInstance().getModello();
 	}
 
-	public static ObservableList<String> estraiStanza() throws ClassNotFoundException, SQLException {
-		return FXCollections.observableArrayList(StanzaDAO.getInstance().getStanza());
+	public static ArrayList<String> estraiStanza() throws ClassNotFoundException, SQLException {
+		return StanzaDAO.getInstance().getStanza();
 	}
 
 	public static boolean cercaStanza(String nomeStanza) throws SQLException, ClassNotFoundException {
+		// true se la stanza già esiste
 		if (StanzaDAO.getInstance().cercaStanza(nomeStanza) == null) {
-			// se ha restituito null la stanza non esiste quindi può essere
-			// creata
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	public static AttrezzaturaStanza aggiungiRiga(String attrSel, int quantita) {
@@ -41,9 +39,9 @@ public class StanzaController {
 		return StanzaDAO.getInstance().getStanzaByName(stanzaImp);
 	}
 
-	public static ObservableList<AttrezzaturaStanza> estraiAttrStanza(String stanzaImp)
+	public static ArrayList<AttrezzaturaStanza> estraiAttrStanza(String stanzaImp)
 			throws ClassNotFoundException, SQLException {
-		return FXCollections.observableArrayList(AttrezzaturaStanzaDAO.getInstance().getAttrSt(stanzaImp));
+		return AttrezzaturaStanzaDAO.getInstance().getAttrSt(stanzaImp);
 	}
 
 	public static void eliminaStanza(String stanzaSel) throws ClassNotFoundException, SQLException {
@@ -53,14 +51,14 @@ public class StanzaController {
 	}
 
 	public static void salvaStanza(String stanza, String edificio, String piano, String tipo,
-			ObservableList<AttrezzaturaStanza> attrSt) throws ClassNotFoundException, SQLException {
+			ArrayList<AttrezzaturaStanza> attrSt) throws ClassNotFoundException, SQLException {
 		// faccio salvare la stanza nelle due diverse tabelle del db
 		AttrezzaturaStanzaDAO.getInstance().salvaStanza(stanza, attrSt);
 		StanzaDAO.getInstance().salvaStanza(stanza, edificio, piano, tipo);
 		return;
 	}
 
-	public static void aggiornaStanza(String stanza, ObservableList<AttrezzaturaStanza> attrSt)
+	public static void aggiornaStanza(String stanza, ArrayList<AttrezzaturaStanza> attrSt)
 			throws ClassNotFoundException, SQLException {
 		AttrezzaturaStanzaDAO.getInstance().aggiornaStanza(stanza, attrSt);
 		return;
@@ -71,5 +69,36 @@ public class StanzaController {
 		StanzaDAO.getInstance().rinominaStanza(prevName, nextName);
 		return;
 	}
+
+	public static AttrezzaturaStanza creaStanza(String stanzaSel, String attr, int quantita) {
+		return new AttrezzaturaStanza(attr, stanzaSel, quantita);
+	}
+
+	public static boolean trovaAttr(String attr, ArrayList<AttrezzaturaStanza> attrSel) {
+		ArrayList<String> nomi = new ArrayList<>();
+		
+		for (AttrezzaturaStanza a : attrSel){
+			nomi.add(a.getAttr());
+		}
+		if (nomi.contains(attr)){
+			return true;
+		}
+		return false;
+	}
+
+	public static String estraiEdificio(String stanzaSel) throws ClassNotFoundException, SQLException {
+		Stanza stanza = StanzaDAO.getInstance().cercaStanza(stanzaSel);
+		System.out.println(stanza.getEdificio());
+		return stanza.getEdificio();
+	}
+
+	public static String estraiTipo(String stanzaSel) throws ClassNotFoundException, SQLException {
+		return StanzaDAO.getInstance().cercaStanza(stanzaSel).getTipo();
+	}
+
+	public static String estraiPiano(String stanzaSel) throws ClassNotFoundException, SQLException {
+		return StanzaDAO.getInstance().cercaStanza(stanzaSel).getPiano();
+	}
+
 
 }

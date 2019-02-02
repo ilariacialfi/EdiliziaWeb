@@ -28,7 +28,7 @@ public class AttrezzaturaDAO {
 		return instance;
 	}
 
-	// creo una observable list dal db
+	// creo una ArrayList dal db
 	public ArrayList<String> estraiAttrezzatura() throws SQLException, ClassNotFoundException {
 		ArrayList<String> listAttr = null;
 

@@ -1,27 +1,19 @@
 package control;
 
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 import dao.AttrezzaturaDAO;
 import dao.AttrezzaturaModelloDAO;
 import dao.ModelloDAO;
-import bean.AttrezzaturaModello;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class ModelloController {
 
-	public static ObservableList<AttrezzaturaModello> trovaModello(String modImp)
-			throws ClassNotFoundException, SQLException {
-		return FXCollections.observableArrayList(AttrezzaturaModelloDAO.getInstance().getModelloByName(modImp));
+	public static ArrayList<String> estraiModelli() throws ClassNotFoundException, SQLException {
+		return ModelloDAO.getInstance().getModello();
 	}
 
-	public static ObservableList<String> estraiAttrezzatura() throws ClassNotFoundException, SQLException {
-		return FXCollections.observableArrayList(AttrezzaturaDAO.getInstance().estraiAttrezzatura());
-	}
-
-	public static ObservableList<String> estraiModelli() throws ClassNotFoundException, SQLException {
-		return FXCollections.observableArrayList(ModelloDAO.getInstance().getModello());
+	public static ArrayList<String> estraiAttrezzatura() throws ClassNotFoundException, SQLException {
+		return AttrezzaturaDAO.getInstance().estraiAttrezzatura();
 	}
 
 	public static boolean cercaModello(String mod) throws ClassNotFoundException, SQLException {
@@ -29,20 +21,20 @@ public class ModelloController {
 		return ModelloDAO.getInstance().cercaModello(mod);
 	}
 
-	public static ObservableList<String> estraiAttr(String mod) throws ClassNotFoundException, SQLException {
-		return FXCollections.observableArrayList(AttrezzaturaModelloDAO.getInstance().getAttrezzatura(mod));
+	public static ArrayList<String> estraiAttr(String mod) throws ClassNotFoundException, SQLException {
+		return AttrezzaturaModelloDAO.getInstance().getAttrezzatura(mod);
 	}
 
 	public static void eliminaModello(String mod) throws ClassNotFoundException, SQLException {
 		AttrezzaturaModelloDAO.getInstance().eliminaModello(mod);
 	}
 
-	public static void aggiornaModello(String mod, ObservableList<String> attrMod)
+	public static void aggiornaModello(String mod, ArrayList<String> attrMod)
 			throws ClassNotFoundException, SQLException {
 		AttrezzaturaModelloDAO.getInstance().aggiornaModello(mod, attrMod);
 	}
 
-	public static void salvaModello(String mod, ObservableList<String> attrMod)
+	public static void salvaModello(String mod, ArrayList<String> attrMod)
 			throws ClassNotFoundException, SQLException {
 		AttrezzaturaModelloDAO.getInstance().salvaModello(mod, attrMod);
 	}

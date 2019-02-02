@@ -22,6 +22,7 @@ public class CercaServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// Click "Esci"
 		if (request.getParameter("esci") != null) {
 			try {
@@ -35,12 +36,22 @@ public class CercaServlet extends HttpServlet {
 
 		// Click "Crea/Modifica Stanza"
 		if (request.getParameter("creaStanza") != null) {
+			try {
+				CercaController.resetAttrSel();
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			}
 			RequestDispatcher rd = request.getRequestDispatcher("CreaStanza.jsp");
 			rd.forward(request, response);
 		}
 
 		// Click "Crea/Modifica Modello"
 		if (request.getParameter("creaModello") != null) {
+			try {
+				CercaController.resetAttrSel();
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			}
 			RequestDispatcher rd = request.getRequestDispatcher("CreaModello.jsp");
 			rd.forward(request, response);
 		}
@@ -120,10 +131,11 @@ public class CercaServlet extends HttpServlet {
 			try {
 				if (stanza.trim().isEmpty())
 					response.sendRedirect("Cerca.jsp");
-				else
+				else {
 					request.setAttribute("AttrezzaturaStanza", CercaController.estraiAttrezzaturaStanza(stanza));
 					RequestDispatcher rd = request.getRequestDispatcher("Cerca.jsp");
 					rd.forward(request, response);
+				}
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
 			}
@@ -160,21 +172,5 @@ public class CercaServlet extends HttpServlet {
 		}
 	}
 
-	// // aggiorna tabella dei dettagli stanza selezionata
-	// public void aggiornaAttrStanza(HttpServletRequest request,
-	// HttpServletResponse response) throws ClassNotFoundException,
-	// SQLException{
-	// if (CercaController.estraiAttrSel().size() == 0) {
-	// return;
-	// } else if
-	// (CercaController.estraiStanze(CercaController.estraiAttrSel()).size() ==
-	// 0) {
-	// return;
-	// } else {
-	// String stanza = request.getParameter("stanzeSel");
-	// request.setAttribute("AttrezzaturaStanza",
-	// CercaController.estraiAttrezzaturaStanza(stanza));
-	// }
-	// }
 
 }

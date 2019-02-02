@@ -101,7 +101,7 @@ public class AttrezzaturaModelloDAO {
 
 	}
 
-	public void aggiornaModello(String mod, ObservableList<String> attrMod)
+	public void aggiornaModello(String mod, ArrayList<String> attrMod)
 			throws SQLException, ClassNotFoundException {
 		// prima elimino tutte le attrezzature del modello
 		eliminaModello(mod);
@@ -110,7 +110,7 @@ public class AttrezzaturaModelloDAO {
 		return;
 	}
 
-	public void salvaModello(String mod, ObservableList<String> attrMod) throws ClassNotFoundException, SQLException {
+	public void salvaModello(String mod, ArrayList<String> attrMod) throws ClassNotFoundException, SQLException {
 		try {
 			Connection conn = ControllerDB.getInstance().connect();
 			pstmn = conn.prepareStatement(SALVA_MODELLO);

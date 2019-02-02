@@ -10,7 +10,7 @@
 <center>
 	<!-- imposto il metodo post in modo che i paramentri del form non vengano mostrati nell'url -->
 	<form method="POST" action="LoginServlet" name="login">
-		<fieldset>
+		<fieldset style="border-color: #2e8b57;">
 			<legend>Login</legend>
 
 			<table style="height: 109px;" data-width="367">

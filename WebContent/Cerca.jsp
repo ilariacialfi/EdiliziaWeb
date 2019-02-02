@@ -1,10 +1,11 @@
+<%@ page import="servlet.CercaServlet"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@ page import="servlet.CercaServlet"%>
+
 <script>
 	
 <%!CercaServlet servlet = new CercaServlet();%>
@@ -14,7 +15,6 @@
 <%servlet.aggiornaAttrSel(request, response);%>
 	
 <%servlet.aggiornaStanze(request, response);%>
-
 	}
 </script>
 
@@ -24,7 +24,7 @@
 <body leftmargin="0" topmargin="0" onload="aggiornaListe()">
 	<!-- questo form contiene i pulsanti per uscire, creare una nuova stanza e un nuovo modello -->
 	<form action="CercaServlet" method="GET">
-		<fieldset>
+		<fieldset style="border-color: #2e8b57;">
 			<table>
 				<tbody>
 					<tr>
@@ -37,11 +37,12 @@
 				</tbody>
 			</table>
 		</fieldset>
-	</form>
-	<!-- form per aggiungere le attrezzature delle stanze da ricercare -->
-	<form action="CercaServlet" method="GET">
-		<fieldset>
-			<legend> Scegliere le attrezzature per ricercare la stanza o selezionarle per eliminarle</legend>
+
+		<!-- form per aggiungere le attrezzature delle stanze da ricercare -->
+
+		<fieldset style="border-color: #2e8b57;">
+			<legend> Scegliere le attrezzature per ricercare la stanza o
+				selezionarle per eliminarle</legend>
 			<table align="center">
 				<tbody>
 					<tr>
@@ -56,7 +57,7 @@
 						<td><input type="number" name="massimo" min="0" max="1000"
 							step="1" placeholder="Max"></td>
 						<td>
-							<fieldset>
+							<fieldset style="border-color: #63B063;">
 								<table>
 									<tbody>
 										<tr>
@@ -74,7 +75,7 @@
 			<!-- lista delle attrezzature scelte -->
 			<table id="TabAttrezzatura" align="center">
 				<thead>
-					<tr>
+					<tr bgcolor="#63B063">
 						<th width=25% align="center">Attrezzatura</th>
 						<th width=25% align="center">Minimo</th>
 						<th width=25% align="center">Massimo</th>
@@ -94,15 +95,15 @@
 				</tbody>
 			</table>
 		</fieldset>
-	</form>
-	<!-- form della tabella delle stanze trovate -->
-	<form action="CercaServlet" method="GET">
-		<fieldset>
+
+		<!-- form della tabella delle stanze trovate -->
+
+		<fieldset style="border-color: #2e8b57;">
 			<legend> Le stanze che contengono le attrezzature
 				selezionate saranno visualizzate qui sotto: </legend>
 			<table id="TabStanze" align="center">
 				<thead>
-					<tr>
+					<tr bgcolor="#63B063">
 						<th width=25% align="center">Stanza</th>
 						<th width=25% align="center">Edificio</th>
 						<th width=25% align="center">Piano</th>
@@ -126,7 +127,7 @@
 			</table>
 			<table align="center">
 				<tr>
-				<th>Selezionare una tra le stanze per visualizzarne i dettagli: </th>
+					<th>Selezionare una tra le stanze per visualizzarne i dettagli:</th>
 					<td><select name="stanzeSel">
 							<option label=Stanze></option>
 							<c:forEach var="stanze" items="${StanzeSelezionate}">
@@ -136,30 +137,31 @@
 					<td><input name="Ok" type="submit" value="Ok"></td>
 				</tr>
 			</table>
+
+
+			<!-- form della tabella di tutte le attrezzature della stanza cliccata -->
+			<table id="TabAttrStanza" align="center">
+				<thead>
+					<tr bgcolor="#63B063">
+						<th width=25% align="center">Attrezzatura</th>
+						<th width=25% align="center">Quantità</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="attrStanza" items="${AttrezzaturaStanza}">
+						<tr>
+							<td width=25% align="center"><c:out
+									value="${attrStanza.getAttr()}" /></td>
+							<td width=25% align="center"><c:out
+									value="${attrStanza.getQuantita()}" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</fieldset>
 	</form>
-	<!-- form della tabella di tutte le attrezzature della stanza cliccata -->
-	<form action="CercaServlet" method="GET">
-		<table id="TabAttrStanza" align="center">
-			<thead>
-				<tr>
-					<th width=25% align="center">Attrezzatura</th>
-					<th width=25% align="center">Quantità</th>
 
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="attrStanza" items="${AttrezzaturaStanza}">
-					<tr>
-						<td width=25% align="center"><c:out
-								value="${attrStanza.getAttr()}" /></td>
-						<td width=25% align="center"><c:out
-								value="${attrStanza.getQuantita()}" /></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</form>
 
 </body>
 </html>
