@@ -43,10 +43,10 @@
 									</c:forEach>
 
 							</select></td>
-							<td width=25%><input name="visualizza" type="submit"
-								value="Visualizza"></td>
+							<td width=25%><input name="ok" type="submit"
+								value="Ok"></td>
 							<td width=25%><input name="elModello" type="submit"
-								value="Elimina Modello" onClick="window.alert('Eliminato!')"></td>
+								value="Elimina Modello" ></td>
 						</tr>
 					</tbody>
 				</table>
@@ -96,7 +96,7 @@
 					</c:forEach>
 					<tr>
 						<td width=25% align="right"><input name="salva" type="submit"
-							value="Salva" onClick="window.alert('Modello Salvato!')"></td>
+							value="Salva" ></td>
 					</tr>
 
 				</tbody>

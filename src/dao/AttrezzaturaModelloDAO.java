@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import control.ControllerDB;
 import bean.AttrezzaturaModello;
-import javafx.collections.ObservableList;
 
 public class AttrezzaturaModelloDAO {
 

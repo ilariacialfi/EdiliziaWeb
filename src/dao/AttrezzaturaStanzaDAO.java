@@ -1,5 +1,4 @@
 package dao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,9 +17,9 @@ public class AttrezzaturaStanzaDAO {
 	private static final String ELIMINA_STANZA = "DELETE FROM attrezzatura_stanza WHERE stanza = ?";
 	private static final String SALVA_STANZA = "INSERT INTO attrezzatura_stanza (stanza, attrezzatura, quantita) VALUES (?, ?, ?)";
 	private static final String RINOMINA_STANZA = "UPDATE attrezzatura_stanza SET stanza = ? WHERE stanza = ?";
-	
+
 	private static AttrezzaturaStanzaDAO instance = null;
-	
+
 	private ResultSet rs = null;
 	private PreparedStatement pstmn = null;
 
@@ -60,8 +59,7 @@ public class AttrezzaturaStanzaDAO {
 		return attrSt;
 	}
 
-	// crea una ArrayList di stanze trovate in base alle quantità minime e
-	// massime selezionate
+	// crea una ArrayList di stanze trovate in base alle quantità richieste
 	public synchronized ArrayList<Stanza> estraiStanzaConAttr(ArrayList<Attrezzatura> listAttr)
 			throws ClassNotFoundException, SQLException {
 		ArrayList<Stanza> listStanze = new ArrayList<Stanza>();
@@ -70,19 +68,20 @@ public class AttrezzaturaStanzaDAO {
 			Connection conn = ControllerDB.getInstance().connect();
 			pstmn = conn.prepareStatement(STANZA_CON_ATTR);
 
-			if (listAttr.size() != 0){
+			if (listAttr.size() != 0) {
 				for (Attrezzatura attr : listAttr) {
 					pstmn.setString(1, attr.getNome());
 					pstmn.setInt(2, attr.getMin());
 					pstmn.setInt(3, attr.getMax());
 					rs = pstmn.executeQuery();
-		
+
 					listStanze = new ArrayList<Stanza>();
 					while (rs.next()) {
 						listStanze.add(new Stanza(rs.getString("nome"), rs.getString("edificio"), rs.getString("piano"),
 								rs.getString("tipo")));
 					}
 				}
+
 			}
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -94,7 +93,6 @@ public class AttrezzaturaStanzaDAO {
 				pstmn.close();
 			}
 		}
-
 		return listStanze;
 	}
 
@@ -148,7 +146,8 @@ public class AttrezzaturaStanzaDAO {
 		salvaStanza(stanza, attrSt);
 	}
 
-	public synchronized void rinominaStanza(String prevName, String nextName) throws SQLException, ClassNotFoundException {
+	public synchronized void rinominaStanza(String prevName, String nextName)
+			throws SQLException, ClassNotFoundException {
 		try {
 			Connection conn = ControllerDB.getInstance().connect();
 			pstmn = conn.prepareStatement(RINOMINA_STANZA);

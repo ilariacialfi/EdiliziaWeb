@@ -33,21 +33,39 @@
 			<fieldset style="border-color: #63B063;">
 				<legend> Scegliere la stanza da modificare o crearne una
 					nuova</legend>
-					
-					<table align="center">
+
+				<table align="center">
 					<tbody>
 						<tr>
-						<td><select name="stanze">
+							<td><select name="stanze">
 									<option label=Stanze></option>
 									<c:forEach var="stanza" items="${listaStanze}">
 										<option><c:out value="${stanza}" /></option>
 									</c:forEach>
 
 							</select></td>
-							<td width=25%><input name="visualizza" type="submit"
-								value="Visualizza"></td>
+							<td width=25%><input name="ok" type="submit"
+								value="Ok"></td>
 							<td width=25%><input name="elStanza" type="submit"
-								value="Elimina Stanza" onClick="window.alert('Eliminata!')"></td>
+								value="Elimina Stanza"></td>
+						</tr>
+					</tbody>
+				</table>
+			</fieldset>
+			<fieldset style="border-color: #63B063;">
+				<legend> Scegliere un modello per la stanza: </legend>
+				<table align="center">
+					<tbody>
+						<tr>
+							<td><select name="modelli">
+									<option label=Modelli></option>
+									<c:forEach var="modello" items="${listaModelli}">
+										<option><c:out value="${modello}" /></option>
+									</c:forEach>
+
+							</select></td>
+							<td width><input name="importa" type="submit"
+								value="Importa Modello"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -55,31 +73,34 @@
 			<fieldset style="border-color: #63B063;">
 				<table align="center">
 					<tbody>
-					<caption><nobr>Inserire o modificare:</nobr></caption>
+					<caption>
+						<nobr>Inserire o modificare:</nobr>
+					</caption>
 					<tr>
 						<td><input name="nome" style="height: 25px"
 							value="${nomeStanza}"></td>
-							<td><select name="edificio">
-								<option label=Edificio></option>
+						<td>Edificio:</td>
+						<td><select name="edificio">
 								<c:forEach var="edificio" items="${listaEdifici}">
 									<option><c:out value="${edificio}" /></option>
 								</c:forEach>
 						</select></td>
+						<td>Piano:</td>
 						<td><select name="piano">
-								<option label=Piano></option>
 								<c:forEach var="piano" items="${listaPiani}">
 									<option><c:out value="${piano}" /></option>
 								</c:forEach>
 						</select></td>
+						<td>Tipo:</td>
 						<td><select name="tipo">
-								<option label=Tipo></option>
 								<c:forEach var="tipo" items="${listaTipi}">
 									<option><c:out value="${tipo}" /></option>
 								</c:forEach>
 						</select></td>
 					</tr>
 					<tr>
-						<td><input name="rinomina" type="submit" value="Rinomina" ></td>
+						<td><input name="rinomina" type="submit" value="Rinomina"
+							align="right"></td>
 					</tr>
 					</tbody>
 				</table>
@@ -96,7 +117,7 @@
 
 							</select></td>
 							<td><input type="number" name="quantita" min="0" max="1000"
-							step="1" placeholder="Q.tà"></td>
+								step="1" placeholder="Q.tà"></td>
 							<td width=25%><input name="aggiungi" type="submit"
 								value="Aggiungi"></td>
 							<td width=25%><input name="elimina" type="submit"
@@ -106,29 +127,31 @@
 				</table>
 			</fieldset>
 			<fieldset style="border-color: #2e8b57;">
-			<legend>Attrezzatura relativa alla stanza scelta</legend>
-			<table id="TabAttr" align="center">
-				<thead>
-					<tr bgcolor="#63B063">
-						<th width=50% align="center">Attrezzatura</th>
-						<th width=50% align="center">Quantità</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="attrSt" items="${attrezzaturaStanza}">
-						<tr>
-							<td width=50% align="center"><c:out value="${attrSt.getAttr()}" /></td>
-							<td width=50% align="center"><c:out value="${attrSt.getQuantita()}" /></td>
+				<legend>Attrezzatura relativa alla stanza scelta</legend>
+				<table id="TabAttr" align="center">
+					<thead>
+						<tr bgcolor="#63B063">
+							<th width=50% align="center">Attrezzatura</th>
+							<th width=50% align="center">Quantità</th>
 						</tr>
-					</c:forEach>
-					<tr>
-						<td width=25% align="right"><input name="salva" type="submit"
-							value="Salva" onClick="window.alert('Modello Salvato!')"></td>
-					</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="attrSt" items="${attrezzaturaStanza}">
+							<tr>
+								<td width=50% align="center"><c:out
+										value="${attrSt.getAttr()}" /></td>
+								<td width=50% align="center"><c:out
+										value="${attrSt.getQuantita()}" /></td>
+							</tr>
+						</c:forEach>
+						<tr>
+							<td width=25% align="right"><input name="salva"
+								type="submit" value="Salva"></td>
+						</tr>
 
-				</tbody>
-			</table>
-		</fieldset>
+					</tbody>
+				</table>
+			</fieldset>
 		</fieldset>
 	</form>
 </body>

@@ -12,7 +12,7 @@ import bean.Stanza;
 public class StanzaDAO {
 
 	private static final String ESTRAI_STANZA = "SELECT nome FROM stanza";
-	private static final String CERCA_STANZA = "SELECT nome FROM stanza WHERE nome = ?";
+	private static final String CERCA_STANZA = "SELECT nome, edificio, piano, tipo FROM stanza WHERE nome = ?";
 	private static final String STANZA_CON_NOME = "SELECT nome, edificio, piano, tipo FROM stanza WHERE nome = ?";
 	private static final String ELIMINA_STANZA = "DELETE FROM stanza WHERE nome = ?";
 	private static final String SALVA_STANZA = "INSERT INTO stanza (nome, edificio, piano, tipo) VALUES (?, ?, ?, ?) ";

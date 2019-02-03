@@ -126,6 +126,7 @@ public class CercaServlet extends HttpServlet {
 				}
 		}
 
+		// Click "Ok"
 		if (request.getParameter("Ok") != null) {
 			String stanza = request.getParameter("stanzeSel");
 			try {

@@ -31,8 +31,8 @@ public class ModelloServlet extends HttpServlet {
 			rd.forward(request, response);
 		}
 
-		// Click "visualizza"
-		if (request.getParameter("visualizza") != null) {
+		// Click "Ok"
+		if (request.getParameter("ok") != null) {
 			String modello = request.getParameter("modelli");
 			try {
 				if (modello.trim().isEmpty()){
@@ -62,6 +62,11 @@ public class ModelloServlet extends HttpServlet {
 			String modello = request.getParameter("modelli");
 			try {
 				if (modello.trim().isEmpty()) {
+					response.setContentType("text/html");
+					PrintWriter pw = response.getWriter();
+					pw.println("<script type=\"text/javascript\">");
+					pw.println("alert('Seleziona un modello da eliminare');");
+					pw.println("</script>");
 					aggiornaForm(request, response, attrSel, modelloSel);
 					RequestDispatcher rd = request.getRequestDispatcher("CreaModello.jsp");
 					rd.forward(request, response);
@@ -104,6 +109,11 @@ public class ModelloServlet extends HttpServlet {
 					rd.forward(request, response);
 				} else if (modelloSel == null) {
 					modelloSel = nome;
+					response.setContentType("text/html");
+					PrintWriter pw = response.getWriter();
+					pw.println("<script type=\"text/javascript\">");
+					pw.println("alert('Nome temporaneo, ricordati di salvare!');");
+					pw.println("</script>");
 					aggiornaForm(request, response, attrSel, modelloSel);
 					RequestDispatcher rd = request.getRequestDispatcher("CreaModello.jsp");
 					rd.forward(request, response);
@@ -131,7 +141,6 @@ public class ModelloServlet extends HttpServlet {
 				if (attr.trim().isEmpty()) {
 					aggiornaForm(request, response, attrSel, modelloSel);
 				} else if (attrSel == null) {
-
 					attrSel = new ArrayList<String>();
 					attrSel.add(attr);
 					aggiornaForm(request, response, attrSel, modelloSel);
@@ -176,11 +185,21 @@ public class ModelloServlet extends HttpServlet {
 			try {
 				if (ModelloController.cercaModello(modelloSel)) {
 					ModelloController.aggiornaModello(modelloSel, attrSel);
+					response.setContentType("text/html");
+					PrintWriter pw = response.getWriter();
+					pw.println("<script type=\"text/javascript\">");
+					pw.println("alert('Modello aggiornato con successo!');");
+					pw.println("</script>");
 					aggiornaForm(request, response, attrSel, modelloSel);
 					RequestDispatcher rd = request.getRequestDispatcher("CreaModello.jsp");
 					rd.forward(request, response);
 				} else {
 					ModelloController.salvaModello(modelloSel, attrSel);
+					response.setContentType("text/html");
+					PrintWriter pw = response.getWriter();
+					pw.println("<script type=\"text/javascript\">");
+					pw.println("alert('Modello salvato con successo!');");
+					pw.println("</script>");
 					aggiornaForm(request, response, attrSel, modelloSel);
 					RequestDispatcher rd = request.getRequestDispatcher("CreaModello.jsp");
 					rd.forward(request, response);

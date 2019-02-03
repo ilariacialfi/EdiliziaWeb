@@ -88,7 +88,6 @@ public class StanzaController {
 
 	public static String estraiEdificio(String stanzaSel) throws ClassNotFoundException, SQLException {
 		Stanza stanza = StanzaDAO.getInstance().cercaStanza(stanzaSel);
-		System.out.println(stanza.getEdificio());
 		return stanza.getEdificio();
 	}
 
@@ -100,5 +99,22 @@ public class StanzaController {
 		return StanzaDAO.getInstance().cercaStanza(stanzaSel).getPiano();
 	}
 
+	public static ArrayList<AttrezzaturaStanza> aggiungiModello(String stanzaSel, ArrayList<String> attrModello) {
+		ArrayList<AttrezzaturaStanza> as = new ArrayList<>();
+		for (String m : attrModello){
+			as.add(new AttrezzaturaStanza(m, stanzaSel, 0));
+		}
+		return as;
+	}
+
+	public static ArrayList<AttrezzaturaStanza> aggiornaAttrezzatura(String attr, Integer quantita,
+			ArrayList<AttrezzaturaStanza> attrSel) {
+		for (AttrezzaturaStanza aStanza : attrSel){
+			if (aStanza.getAttr().equals(attr)){
+				aStanza.setQuantita(quantita);
+			}
+		}
+		return attrSel;
+	}
 
 }

@@ -61,7 +61,7 @@
 								<table>
 									<tbody>
 										<tr>
-											<td><input name="aggAttr" type="submit" value="Aggiungi"></td>
+											<td><input name="aggAttr" type="submit" value="Aggiungi" ></td>
 											<td><input name="elAttr" type="submit" value="Elimina"></td>
 											<td><input name="cerca" type="submit" value="Cerca"></td>
 										</tr>
